@@ -107,12 +107,12 @@ import			XMonad.Util.NamedScratchpad		-- configure individual scratchpads
 import			XMonad.Actions.CycleWS (nextWS, prevWS, toggleWS, toggleOrView)	-- cycling through workspaces; toggle last ws
 import			XMonad.Actions.GridSelect		-- tool for navigating through all clients
 import			XMonad.Actions.FloatKeys		-- enable floating a client by key press
-import  qualified 	XMonad.Actions.FlexibleResize as Flex
+import  qualified   XMonad.Actions.FlexibleResize as Flex
 import			XMonad.Actions.PerWorkspaceKeys		-- per ws key binding
 
 import			Data.Monoid				-- myEventHook = 
 import			Data.List				-- for clickable workspaces
-import	qualified	Data.Map as M				-- `M.fromList'
+import  qualified	Data.Map as M				-- `M.fromList'
 
 import			Graphics.X11.ExtraTypes.XF86
 
@@ -124,26 +124,26 @@ import			System.IO (Handle, hPutStrLn)
 -------------------------------------------------------------------------------------------------------------------------------------------
 ---	II  Fonts and Colors
 
-myFont			= "xft:OCR A:size=10"
-dzenFont		= "xft:OCR A:size=10"
-myTitleFont		= "UnDotum-14:autohint=true"
-myEmptyTitleFont	= "UnDotum-14:italic"	-- for when there is no window
-wsFont			= "MarVAlea-20"		-- special workspace font
+myFont          = "xft:OCR A:size=10"
+dzenFont        = "xft:OCR A:size=10"
+myTitleFont     = "UnDotum-14:autohint=true"
+myEmptyTitleFont = "UnDotum-14:italic"  -- for when there is no window
+wsFont          = "MarVAlea-20"         -- special workspace font
 
-colorBlack		= "#020202"
-colorBlackAlt		= "#1c1c1c"
-colorGray		= "#444444"
-colorGrayAlt		= "#222222"
-colorWhite		= "#dddddd"
-colorWhiteAlt		= "#aaaaaa"
-colorMagenta		= "#8e82a2"
-colorBlue		= "#3399ff"
-colorRed		= "#d74b73"
-colorGreen		= "#99cc66"
-myNormalBorderColor	= colorGrayAlt		-- frame color	    for non-focused windows	
-myFocusedBorderColor	= colorBlue		-- 	  		focused window
-myLayoutFgColor		= colorBlue		-- foreground color of layout indicator
-myLayoutBgColor		= colorGrayAlt		-- background
+colorBlack      = "#020202"
+colorBlackAlt   = "#1c1c1c"
+colorGray       = "#444444"
+colorGrayAlt    = "#222222"
+colorWhite      = "#dddddd"
+colorWhiteAlt   = "#aaaaaa"
+colorMagenta    = "#8e82a2"
+colorBlue       = "#3399ff"
+colorRed        = "#d74b73"
+colorGreen      = "#99cc66"
+myNormalBorderColor	= colorGrayAlt -- frame color    for non-focused windows	
+myFocusedBorderColor = colorBlue   --                    focused window
+myLayoutFgColor = colorBlue        -- foreground color of layout indicator
+myLayoutBgColor = colorGrayAlt     -- background
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -151,29 +151,29 @@ myLayoutBgColor		= colorGrayAlt		-- background
 
 main :: IO ()
 main  = do
-	status  <- spawnPipe myDzenStatus					-- display layouts, workspaces, and focused window title
+	status <- spawnPipe myDzenStatus                        -- display layouts, workspaces, and focused window title
 --	wsBar  <- spawnPipe myWsBar
-	wsBar1	<- spawnPipe myWsBar1
-	wsBar2	<- spawnPipe myWsBar2
-	conky   <- spawnPipe myDzenMusic					--	   music titles
-	conky   <- spawnPipe myDzenSystem					--	   system values			
-	pipe    <- spawnPipe "xmobar $HOME/.xmonad/xxmobarrc-ko"			--	   weather and date			==> 
-	xmonad	$ myUrgencyHook	$ defaultConfig					-- 
-		{ terminal		= myTerminal				-- define default vte
-		, modMask		= mod4Mask				-- use the "Windows"-keys as standard for key bindings
+	wsBar1 <- spawnPipe myWsBar1
+	wsBar2 <- spawnPipe myWsBar2
+	conky  <- spawnPipe myDzenMusic                         -- music titles
+	conky  <- spawnPipe myDzenSystem                        -- system values			
+	pipe   <- spawnPipe "xmobar $HOME/.xmonad/xxmobarrc-ko" -- weather and date          ==> 
+	xmonad  $ myUrgencyHook $ defaultConfig                 -- 
+		{ terminal      = myTerminal                        -- define default vte
+		, modMask       = mod4Mask                          -- use the "Windows"-keys as standard for key bindings
 		, focusFollowsMouse	= True
-		, borderWidth		= 1
-		, normalBorderColor	= myNormalBorderColor
-		, focusedBorderColor	= myFocusedBorderColor
-		, layoutHook		= myLayoutHook				-- define a set of layouts			==>
---		, workspaces		= myWorkspaces1 <+> myWorkspaces2				-- define individual workspaces			==>
-		, workspaces		= myWorkspaces
-		, manageHook		= manageDocks 	<+> myManageHook	-- how to deal with bars and windows		==> 
-		, logHook		= myLogHookA status <+> myLogHookB wsBar1 <+> myLogHookB wsBar2
-		, handleEventHook	= fullscreenEventHook			-- enable to display fullscreen windows
-		, keys			= myKeys				-- definitions for shortcuts (aka keybindings)	==> 
-		, mouseBindings		= myMouseBindings			-- definitons for mouse actions			==>
-		, startupHook		= myStartupHook				-- other important settings at session start
+		, borderWidth   = 1
+		, normalBorderColor = myNormalBorderColor
+		, focusedBorderColor = myFocusedBorderColor
+		, layoutHook    = myLayoutHook                      -- define a set of layouts    ==>
+--		, workspaces    = myWorkspaces1 <+> myWorkspaces2   -- define individual workspaces  ==>
+		, workspaces    = myWorkspaces
+		, manageHook    = manageDocks <+> myManageHook	    -- how to deal with bars and windows ==> 
+		, logHook       = myLogHookA status <+> myLogHookB wsBar1 <+> myLogHookB wsBar2
+		, handleEventHook = fullscreenEventHook             -- enable to display fullscreen windows
+		, keys          = myKeys                            -- definitions for shortcuts (aka keybindings)	==> 
+		, mouseBindings = myMouseBindings                   -- definitons for mouse actions			==>
+		, startupHook   = myStartupHook                     -- other important settings at session start
 		}
 
 myStartupHook	= setWMName "LG3D"	>> setDefaultCursor xC_left_ptr		-- make desktop recognizable for java apps & set X cursor
@@ -192,11 +192,11 @@ myLogHookB h	= dynamicLogWithPP	$ wsPP		{ ppOutput = hPutStrLn h }
 -- myLogHook h = dynamicLogWithPP $ defaultPP
 --      { ... }
 --
--- http://www.mntnoe.com/wp-content/uploads/2010/05/xmonad.hs.html  ===  mehrere logs
+-- http://www.mntnoe.com/wp-content/uploads/2010/05/xmonad.hs.html  ===  several logs
 
 -- xmonad myworkspaces myloghook
 
-myUrgencyHook	= withUrgencyHook dzenUrgencyHook				-- special settings for urgent events (say apps gaining
+myUrgencyHook	= withUrgencyHook dzenUrgencyHook                      -- special settings for urgent events (say apps gaining
 	{ args	= ["-fn", dzenFont, "-bg", colorGrayAlt, "-fg", colorGreen] }	-- attention)
 
 --myTerminal	= "XDG_CONFIG_HOME=$HOME/.config/Terminal terminal"	-- doesn't help resetting config for myTerminal	==> IX(d)
@@ -277,15 +277,15 @@ myLayoutHook	= id
 	$ mkToggle (single REFLECTX)
 	$ mkToggle (single REFLECTY)
 	$ onWorkspace "1" sysLayouts	--   special ws "1" layouts; alternatively "(myWorkspaces !! 1)" if renamed
-	$ onWorkspace "4" gfxLayouts	--		"4"					     4
-	$ onWorkspace "5" dtpLayouts	--		"5" 					     5
-	$ onWorkspace "6" docLayouts	--		"6"					     6
-	$ onWorkspace "7" wwwLayouts	--		"7" 					     7
-	$ onWorkspace "8" comLayouts	--		"8" 					     8
-	$ onWorkspace "9" mdiLayouts	--		"9"					     9
-	$ onWorkspace "0" vmfLayouts	--		"0"					     0
-	$ allLayouts			-- ... other defined layouts else.
-	where				-- creating own layout collections...
+	$ onWorkspace "4" gfxLayouts	--              "4"                                          4
+	$ onWorkspace "5" dtpLayouts	--              "5"                                          5
+	$ onWorkspace "6" docLayouts	--              "6"                                          6
+	$ onWorkspace "7" wwwLayouts	--              "7"                                          7
+	$ onWorkspace "8" comLayouts	--              "8"                                          8
+	$ onWorkspace "9" mdiLayouts	--              "9"                                          9
+	$ onWorkspace "0" vmfLayouts	--              "0"                                          0
+	$ allLayouts                    -- ... other defined layouts else.
+	where                           -- creating own layout collections...
 		allLayouts	= myMirr ||| myTile ||| myObig ||| myMosA ||| myTabM
 		sysLayouts	= myLogs
 		wwwLayouts	= myTabs ||| myTabM ||| myStck
@@ -306,19 +306,19 @@ myLayoutHook	= id
 		myTabs	= named "TS"	(smartBorders (tabbed shrinkText myTabTheme))
 		myTabM	= named "TM"	(smartBorders (mastered 0.01 0.4	$ (tabbed shrinkText myTabTheme)))
 		myStck	= named "ST"	(smartBorders (StackTile 1 (3/100) (1/2)))
---	orig:	myGimp	= named "G"	(withIM (0.15) (Role "gimp-toolbox")	$ reflectHoriz $ withIM (0.15) (Role "gimp-dock") (myTabs))
+-- orig:	myGimp	= named "G"	(withIM (0.15) (Role "gimp-toolbox")	$ reflectHoriz $ withIM (0.15) (Role "gimp-dock") (myTabs))
 -- vgl. https://bbs.archlinux.org/viewtopic.php?pid=1060444#p1060444
 -- note: no special Gimp configs necessary anymore since Gimp 2.8 in single window mode
-		myGimp  = named "G"     (withIM (0.15) (Role "toolbox")    $ reflectHoriz $ withIM (0.15) (Role "dock") (myTabs))
-		myChat	= named "CH"	(withIM (0.20) (Title "Buddy List")	$ Mirror myTile)
-		myPrat	= named "P"	(limitWindows 3 $ Dishes nmaster ratio)
+		myGimp  = named "G"     (withIM (0.15) (Role "toolbox")     $ reflectHoriz $ withIM (0.15) (Role "dock") (myTabs))
+		myChat	= named "CH"    (withIM (0.20) (Title "Buddy List")	$ Mirror myTile)
+		myPrat	= named "P"	    (limitWindows 3 $ Dishes nmaster ratio)
 						where
-							nmaster	= 1		-- default number of windows in the master pane
-							ratio	= 1/3		-- default proportion of screen occupied by other panes
+							nmaster = 1         -- default number of windows in the master pane
+							ratio   = 1/3       -- default proportion of screen occupied by other panes
 		myLogs  = named "L"     (withIM procmeterSize procmeter (allLayouts))
 						where
-							procmeterSize	= 0.094	-- size of screen procmeter will occupy  
-							procmeter	= ClassName "ProcMeter3"      -- match procmeter
+							procmeterSize = 0.094	-- size of screen procmeter will occupy  
+							procmeter   = ClassName "ProcMeter3"      -- match procmeter
 
 {-	References
 	----------
@@ -332,29 +332,29 @@ myLayoutHook	= id
 ---	VII  Manage Hook		==> what to do with certain apps; use again (myWorkspaces !! n) if renamed
 
 myManageHook :: ManageHook
-myManageHook = (composeAll 	. concat $		-- definitions for special actions, groups of apps, and certain window client properties ...
-	[ [resource	=? r	--> doIgnore		| r <- myIgnoreR]	-- apps & desktop elements not to be treated as clients by resource
-	, [className	=? c	--> doIgnore		| c <- myIgnoreC]	-- 							by class
-	, [className	=? c	--> doShift "1"		| c <- mySysS	]	-- move mySysS  windows  to ws  "1" by classname
-	, [className    =? c    --> doShiftAndGo "2"         | c <- myMngS	]	--	myMngS			"2"
-	, [className    =? c    --> doShift "3"         | c <- myDicS	]	-- 	myDicS			"3"
-        , [className    =? c    --> doShiftAndGo "4"	| c <- myGfxS	]	--	myGfxS			"4"
-	, [className    =? c    --> doShift "5"         | c <- myDtpS	]	--	myDtpS			"5"
-	, [className	=? c	--> doShift "6"		| c <- myDocS	]	-- 	myDocS			"6"	
-	, [className	=? c	--> doShiftAndGo "7"	| c <- myWebS	]	--	myWebS			"7"
-	, [className	=? c	--> doShift "8"		| c <- myChatS	]	--	myChatS			"8"
-        , [className    =? c    --> doShiftAndGo "9"	| c <- myPlrS	]	--	myPlrS			"9"		and follow focus
-	, [className	=? c	--> doShiftAndGo "0"	| c <- myGameS	]	--	myGameS			"0"
-	, [className	=? c	--> doCenterFloat	| c <- myFloatCC]	-- float centered   by classname 
+myManageHook = (composeAll 	. concat $           -- definitions for special actions, groups of apps, and certain window client properties ...
+    [ [resource     =? r    --> doIgnore         | r <- myIgnoreR]  -- apps & desktop elements not to be treated as clients by resource
+	, [className    =? c    --> doIgnore         | c <- myIgnoreC]  --                          by class
+	, [className    =? c    --> doShift "1"      | c <- mySysS	]   -- move mySysS  windows  to ws  "1" by classname
+	, [className    =? c    --> doShiftAndGo "2" | c <- myMngS	]   --	myMngS                      "2"
+	, [className    =? c    --> doShift "3"      | c <- myDicS	]   -- 	myDicS                      "3"
+    , [className    =? c    --> doShiftAndGo "4" | c <- myGfxS	]   --	myGfxS                      "4"
+	, [className    =? c    --> doShift "5"      | c <- myDtpS	]   --	myDtpS                      "5"
+	, [className	=? c	--> doShift "6"      | c <- myDocS	]   -- 	myDocS                      "6"	
+	, [className	=? c	--> doShiftAndGo "7" | c <- myWebS	]   --	myWebS                      "7"
+	, [className	=? c	--> doShift "8"      | c <- myChatS	]   --	myChatS                     "8"
+    , [className    =? c    --> doShiftAndGo "9" | c <- myPlrS	]   --	myPlrS                      "9"     and follow focus
+	, [className	=? c	--> doShiftAndGo "0" | c <- myGameS	]   --	myGameS                     "0"
+	, [className	=? c	--> doCenterFloat    | c <- myFloatCC]  --  float centered by classname 
 --	, stringProperty "blah blah" =? "wallpaper1.jpg" --> doShift "web"
 --	, [name		=? n	--> doShift "2"		| n <- myMngWall]
 	, [stringProperty "WM_NAME" =? "2wall" --> doShift "2"]
-	, [name		=? n	--> doCenterFloat	| n <- myFloatCN]	--		    by name
-	, [name		=? n	--> doSideFloat CE	| n <- myFloatCE]	--	 east
-	, [name		=? n	--> doSideFloat NE	| n <- myFloatNE]	--	 north-east
+	, [name		=? n	--> doCenterFloat	| n <- myFloatCN]       --   by name
+	, [name		=? n	--> doSideFloat CE	| n <- myFloatCE]       --     east
+	, [name		=? n	--> doSideFloat NE	| n <- myFloatNE]       --  north-east
 --	, className =? "Gimp"	--> doFloat
 
-        , [name		=? n	--> doMaster		| n <- myMasterS]	-- set as master
+    , [name		=? n	--> doMaster		| n <- myMasterS]	-- set as master
 	, [className	=? c	--> doF W.focusDown	| c <- myFocusDC]	-- don't focus at launch by classname
 	, [isFullscreen		--> doF W.focusDown	<+> doFullFloat]
 	]) <+> namedScratchpadManageHook myScratchpads	--									==> IXd
@@ -369,7 +369,7 @@ myManageHook = (composeAll 	. concat $		-- definitions for special actions, grou
 		myMngS		= ["Thunar","tdfsb","Tlmgr","Moto4lin"]		-- dropbox *sql cms-div; fz full
 		myDicS		= ["Stardict","org-omegat-Main","Midori","Gtranslator","Poedit"]	-- bitext2tmx gok transifex
 		myDtpS		= ["libreoffice-writer","libreoffice-calc","libreoffice-impress"
-					,"Evince","Scribus","Texmaker","Yudit","Apvlv","Zim","Frescobaldi","Musescore"]	-- unoconv abiword? siag dudenbib tustep vim/tex emacs/auctex  cxoffice
+					,"Evince","Scribus","Texmaker","Yudit","Apvlv","Zim","Frescobaldi","Musescore"]	-- unoconv abiword? siag dudenbib tustep vim/tex emacs/auctex cxoffice
 		myDocS		= ["Acroread","Calibre","Lucidor","Qcomicbook","ComicMaster"]		-- zathura pandoc wordpress 
 		myWebS		= ["Firefox","Uzbl-tabbed"]	-- wordpress TinyMCE flatpress apache atl.
 		myGfxS		= ["Gimp","gimp","Mirage","libreoffice-draw","fontforge","Xsane","Mtpaint","TuxPaint.TuxPaint"] -- vym inkscape
@@ -385,23 +385,8 @@ myManageHook = (composeAll 	. concat $		-- definitions for special actions, grou
 		myFocusDC	= ["Event Tester","Notify-osd"]
 		myMasterS	= ["Praat Objects","Vorschau Perfection1640:002"]  -- declare which X client from a multi window app becomes master when started
 -- https://bbs.archlinux.org/viewtopic.php?id=132319  -->
-		myMngWall	= ["feh [1 of 1] - steel-bg.jpg"]
+		myMngWall	= ["feh [1 of 1] - XXX.jpg"]
 
-
-
--- zsh-profile --> path für scribus hinzu!
--- mysql postgresql libreoffice-impress
--- cli: units talkfilters
--- https://wiki.archlinux.org/index.php/Scientific_Applications
--- https://wiki.archlinux.org/index.php/Pacman_GUI_Frontends#pkgnotify.sh
--- coding ws
--- games ws
--- ws for database tools/cms/social media : typo3 *sql wordpress atl.
--- finances ws for economic stock charts or personal business stuff, eg gnucash hibiscus buddi tickvue
--- (natural) sciences
-
--- unoconv: http://dag.wieers.com/home-made/unoconv/
--- http://www.artofsolving.com/opensource/jodconverter
 {-	References
 	---------- 
 	http://www.haskell.org/haskellwiki/Xmonad/Frequently_asked_questions#I_need_to_find_the_class_title_or_some_other_X_property_of_my_program
