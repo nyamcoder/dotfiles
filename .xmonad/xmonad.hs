@@ -157,7 +157,7 @@ main  = do
 	wsBar2 <- spawnPipe myWsBar2
 	conky  <- spawnPipe myDzenMusic                         -- music titles
 	conky  <- spawnPipe myDzenSystem                        -- system values			
-	pipe   <- spawnPipe "xmobar $HOME/.xmonad/xxmobarrc-ko" -- weather and date          ==> 
+	pipe   <- spawnPipe "xmobar $HOME/.xmonad/xxmobarrc-ko" -- weather and date              ==> 
 	xmonad  $ myUrgencyHook $ defaultConfig                 -- 
 		{ terminal      = myTerminal                        -- define default vte
 		, modMask       = mod4Mask                          -- use the "Windows"-keys as standard for key bindings
@@ -165,18 +165,18 @@ main  = do
 		, borderWidth   = 1
 		, normalBorderColor = myNormalBorderColor
 		, focusedBorderColor = myFocusedBorderColor
-		, layoutHook    = myLayoutHook                      -- define a set of layouts    ==>
+		, layoutHook    = myLayoutHook                      -- define a set of layouts       ==>
 --		, workspaces    = myWorkspaces1 <+> myWorkspaces2   -- define individual workspaces  ==>
 		, workspaces    = myWorkspaces
 		, manageHook    = manageDocks <+> myManageHook	    -- how to deal with bars and windows ==> 
 		, logHook       = myLogHookA status <+> myLogHookB wsBar1 <+> myLogHookB wsBar2
 		, handleEventHook = fullscreenEventHook             -- enable to display fullscreen windows
-		, keys          = myKeys                            -- definitions for shortcuts (aka keybindings)	==> 
-		, mouseBindings = myMouseBindings                   -- definitons for mouse actions			==>
+		, keys          = myKeys                            -- definitions for shortcuts (aka keybindings) ==> 
+		, mouseBindings = myMouseBindings                   -- definitons for mouse actions  ==>
 		, startupHook   = myStartupHook                     -- other important settings at session start
 		}
 
-myStartupHook	= setWMName "LG3D"	>> setDefaultCursor xC_left_ptr		-- make desktop recognizable for java apps & set X cursor
+myStartupHook	= setWMName "LG3D"	>> setDefaultCursor xC_left_ptr         -- make desktop recognizable for java apps & set X cursor
 
 myLogHookA h	= dynamicLogWithPP	$ myDzenPP	{ ppOutput = hPutStrLn h }	-- pass desktop action logs to the PP w/ dzen2	==> 
 myLogHookB h	= dynamicLogWithPP	$ wsPP		{ ppOutput = hPutStrLn h }
@@ -206,7 +206,7 @@ myTerminal      = "urxvtc"
 -------------------------------------------------------------------------------------------------------------------------------------------
 ---	IV  Statusbars
 
----     dzen-bar for the PrettyPrinter with individual layout (top left)		==> section xx
+---     dzen-bar for the PrettyPrinter with individual layout (top left)
 myDzenStatus    = "dzen2 -w '920' -ta 'l'" ++ myDzenStyle
 myDzenStyle     = " -h '34' -fg '#3399ff' -bg '#222222'"
 
@@ -263,13 +263,12 @@ or running own shell scripts
 
 myWorkspaces = map show $ [1..9] ++ [0]						-- represent ws names as numbers from 1 to 9, and 0 respectively
 
--- where 1 is for ...
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 ---	VI  Layout Declarations
 
 myLayoutHook	= id
---	$ gaps [(U,16), (D,0), (L,0), (R,0)]	-- weglassen, da sonst stalonetray floatet
+--	$ gaps [(U,16), (D,0), (L,0), (R,0)]	-- omitted as stalonetray would float otherwise
 	$ avoidStruts			-- 
 	$ minimize
 	$ mkToggle (single TABBED)	-- enable 
@@ -353,10 +352,9 @@ myManageHook = (composeAll 	. concat $           -- definitions for special acti
 	, [name		=? n	--> doSideFloat CE	| n <- myFloatCE]       --     east
 	, [name		=? n	--> doSideFloat NE	| n <- myFloatNE]       --  north-east
 --	, className =? "Gimp"	--> doFloat
-
     , [name		=? n	--> doMaster		| n <- myMasterS]	-- set as master
-	, [className	=? c	--> doF W.focusDown	| c <- myFocusDC]	-- don't focus at launch by classname
-	, [isFullscreen		--> doF W.focusDown	<+> doFullFloat]
+	, [className   =? c --> doF W.focusDown	| c <- myFocusDC]	-- don't focus at launch by classname
+	, [isFullscreen     --> doF W.focusDown	<+> doFullFloat]
 	]) <+> namedScratchpadManageHook myScratchpads	--									==> IXd
 	where						-- ... and its contents
 		doShiftAndGo ws = doF (W.greedyView ws) <+> doShift ws
@@ -470,18 +468,12 @@ wsPP = xmobarPP	{ ppOrder		= \(ws:l:t:_)	-> [ws]				-- invoke an xmobar pretty p
 			Nothing		-> "1"
 			Just n		-> show (n+1)
 
--- noch mehr xpms bei siag!
 
 {-	Notes
 	-----
 			see sections III, IV, V
 
-	References
-	----------
-
-
-
-	haven't experienced urgent cases yet
+	* haven't experienced "urgent" cases yet
 -}
 
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -524,11 +516,11 @@ myXPConfig	= defaultXPConfig
 
 --- (c) GridSelect (easy window navigation)
 myColorizer 	= colorRangeFromClassName
-	(0x88,0x88,0x88)	-- background color:	lowest  inactive client
-	(0x44,0x44,0x44)	-- 	 "		highest inactive
-	(0x22,0x22,0x22)	-- 	 "		     active 	 client
-	(0xdd,0xdd,0xdd)	-- foreground color:	     inactive
-	(0x33,0x99,0xff)	-- 	 "		     active
+	(0x88,0x88,0x88)	-- background color: lowest  inactive client
+	(0x44,0x44,0x44)	--        "          highest inactive
+	(0x22,0x22,0x22)	--        "                   active client
+	(0xdd,0xdd,0xdd)	-- foreground color: inactive
+	(0x33,0x99,0xff)	--        "          active
 
 myGSConfig colorizer = (buildDefaultGSConfig myColorizer)
 	{ gs_cellheight		= 48
