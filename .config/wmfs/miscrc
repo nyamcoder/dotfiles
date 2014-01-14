@@ -1,0 +1,23 @@
+[misc]
+        use_xft               = true			### bei false 8p-def-schrift
+#        font                  = "Bangwool-10"
+#	font			= "OCR A Extended-16"
+#	font			= "xft: DotumChe-12" # für xmobar
+	font			= "ocra10-12"		
+        raisefocus            = true
+        focus_follow_mouse    = true
+        focus_follow_movement = true
+        opacity               = 255
+
+        # focus_pointer_click: click on unfocused client area:
+        # true  -- default, set focus
+        # false -- click go to client; including dockapps
+        focus_pointer_click = true
+###  http://wmfs.info/projects/wmfs/wiki/UserWmfsrc_WillyKaze
+#        status_timing      = 3     #seconds
+### WMFS has removed status_path and status_timing for the time being, you'll need to manually run the status script.  nach: https://bbs.archlinux.org/viewtopic.php?pid=982522#p982522
+#        status_path       = "$HOME/.config/wmfs/status.sh" 
+
+
+[/misc]
+

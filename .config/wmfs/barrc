@@ -1,0 +1,51 @@
+[bar]
+### def: "#C98F0A"	"#191919"    def. fg = "#7E89A2"
+### "#C98F0A" dunkelgelb 				
+### "#C9A34E" hellgelb
+### "#429942" dunkelgrün
+##################################  
+
+
+#        bg     = "#191919"
+	bg	= "#000000"		### hintergrund leere tags --> eigtl zu tagsrc
+#        fg     = "#D4D4D4"
+	fg	= "#c98f0a"		### vordergrund leere tags --> eigtl zu tagsrc
+        border = false
+        height = "60"
+
+        light_shade =  0.10
+        dark_shade  = -0.10
+
+        # Order of infobar elements:
+        # t = Tag list
+        # l = Layout button
+        # s = Selbar
+        elements_order = "lts"
+
+        [systray]
+                # Enable/disable systray
+                active = true
+
+                # Screen of systray
+                screen = 0
+
+                # Spacing between tray icons
+                spacing = 3
+        [/systray]
+
+        # Remove this section to disable the selbar.
+        [selbar]
+#                bg = "#191919"
+		bg = "#C9A34E"
+                fg = "#000000"
+
+                # Cut title length
+                max_length = 200
+
+                [mouse] button = "3" func = "clientlist"  [/mouse]
+                [mouse] button = "4" func = "client_next" [/mouse]
+                [mouse] button = "5" func = "client_prev" [/mouse]
+        [/selbar]
+
+[/bar]
+

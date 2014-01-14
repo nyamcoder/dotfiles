@@ -1,0 +1,22 @@
+Config	{ font =	"xft:UnDotum-10"
+	, bgColor =	"#222222"
+	, fgColor =	"#aaaaaa"
+	, position =	Static { xpos = 920 , ypos = -2, width = 830, height = 18 }
+	, lowerOnStart = False
+	, commands =	[ Run Weather "UHWW" ["-t","<fc=#dddddd>라선 </fc><tempC>°C <skyCondition>","-L","9","-H","25","--normal","#a4bc51","--high","#d94c3d","--low","lightblue"] 36000
+			, Run Weather "ZYTL" ["-t","<tempC>°C <skyCondition>","-L","9","-H","25","--normal","#a4bc51","--high","#d94c3d","--low","lightblue"] 36000
+			, Run Weather "RKSS" ["-t","<fc=#3399ff>서울 </fc><tempC>°C <skyCondition>","-L","9","-H","25","--normal","#a4bc51","--high","#d94c3d","--low","lightblue"] 36000
+			, Run Weather "RKPC" ["-t","<fc=#dddddd>제주 </fc><tempC>°C <skyCondition>","-L","9","-H","25","--normal","#a4bc51","--high","#d94c3d","--low","lightblue"] 36000
+			, Run Weather "RKPK" ["-t","<fc=#dddddd>부산 </fc><tempC>°C <skyCondition>","-L","9","-H","25","--normal","#a4bc51","--high","#d94c3d","--low","lightblue"] 36000
+			, Run Com "sh" ["$HOME/.config/wmfs/datum.sh"] "dat" 60
+			, Run Com "sh" ["$HOME/.config/wmfs/tag.sh"] "day" 60
+			, Run Com "sh" ["$HOME/.config/wmfs/zeit.sh"] "ti" 60
+			, Run Com "sh" ["$HOME/.config/wmfs/vmnm.sh"] "dt" 60
+			]
+	, sepChar =	"%"
+	, alignSep =	"}{"
+	, template =	" %UHWW%  <fc=#dddddd>평양 </fc>%ZYTL%  <fc=#dddddd>%RKSS% </fc> %RKPK%  %RKPC%}{<fc=#3399ff>%dat%</fc> (<fc=#dddddd>%day%</fc>) <fc=#3399ff>%ti%</fc><fc=#dddddd>%dt%</fc>  "
+	}
+
+
+

@@ -1,0 +1,50 @@
+# ~/.conkyrc    ### eigtl. .xmonad/conkyrc
+
+background no
+out_to_x no
+out_to_console yes
+update_interval 5
+total_run_times 0
+use_spacer none
+
+
+
+TEXT
+
+ \
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} >= 90}^fg(\#ff0000)^i($HOME/.icons/xdzen/spkr_01.xbm)${else}\
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} >= 1}^fg(\#3399ff)^i($HOME/.icons/xdzen/spkr_01.xbm)${else}\
+^fg(\#dddddd)^i($HOME/.icons/xdzen/spkr_02.xbm)${endif}${endif} \
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} == 100}^fg(\#ff0000)llllllllll${else}\
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} >= 90}^fg(\#ff0000)lllllllll^fg(\#aaaaaa)l${else}\
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} >= 80}^fg(\#eeee00)llllllll^fg(\#aaaaaa)ll${else}\
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} >= 70}^fg(\#3399ff)lllllll^fg(\#aaaaaa)lll${else}\
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} >= 60}^fg(\#3399ff)llllll^fg(\#aaaaaa)llll${else}\
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} >= 50}^fg(\#3399ff)lllll^fg(\#aaaaaa)lllll${else}\
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} >= 40}^fg(\#3399ff)llll^fg(\#aaaaaa)llllll${else}\
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} >= 30}^fg(\#3399ff)lll^fg(\#aaaaaa)lllllll${else}\
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} >= 20}^fg(\#dddddd)ll^fg(\#aaaaaa)llllllll${else}\
+${if_match ${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"} <= 1}^fg(\#dddddd)l^fg(\#aaaaaa)lllllllll${else}\
+^fg(\#aaaaaa)|||||||||| ${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}   \
+${if_match ${cpu cpu0} >= 90}^fg(\#dd0000)${else}\
+^fg(\#3399ff)${endif}^i($HOME/.icons/xdzen/cpu.xbm) \
+${if_match ${cpu cpu0} >= 90}^fg(\#dd0000)${else}\
+${if_match ${cpu cpu0} >= 75}^fg(\#eeee00)${else}\
+${if_match ${cpu cpu0} >= 3}^fg(\#88FF00)${else}\
+^fg(\#ff00ff)${endif}${endif}${endif}${cpu}\
+${if_match ${cpu cpu0} >= 90}^fg(\#dd0000)${else}\
+^fg(\#aaaaaa)${endif}% \
+^fg(\#aaaaaa)@^fg(\#dddddd)${freq_g 1}^fg(\#aaaaaa)GHz   \
+${if_match ${memperc} >= 80}^fg(\#dd0000)${else}\
+^fg(\#3399ff)${endif}^i($HOME/.icons/xdzen/mem.xbm) \
+${if_match ${memperc} >= 80}^fg(\#dd0000)${else}\
+${if_match ${memperc} >= 50}^fg(\#dddd00)${else}\
+^fg(\#dddddd)${endif}${endif}${memperc}\
+^fg(\#aaaaaa):\
+${if_match ${swapperc} >= 30}^fg(\#dd0000)${else}\
+${if_match ${swapperc} >= 1}^fg(\#dddd00)${else}\
+^fg(\#aaaaaa)${endif}${endif}${swapperc}\
+${if_match ${memperc} >= 80}^fg(\#dd0000)${else}\
+^fg(\#aaaaaa)${endif}%   \
+^fg(\#3399ff)^i($HOME/.icons/xdzen/arrow_down2.xbm)^fg(\#a4bc51)${downspeedf eth0}\
+^fg(\#3399ff)^i($HOME/.icons/xdzen/arrow_up2.xbm)^fg(\#d94c3d)${upspeedf eth0}^fg(\#aaaaaa)kb/s  

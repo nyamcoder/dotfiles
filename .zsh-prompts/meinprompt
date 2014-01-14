@@ -1,0 +1,166 @@
+### :: nyamcoder ::
+#   Phil!'s ZSH Prompt --> modified
+#   see: http://aperiodic.net/phil/prompt/
+
+#print "$bg[cyan]$fg[blue]Auf geht's!" >> $TTY
+
+function precmd {
+
+    local TERMWIDTH
+    (( TERMWIDTH = ${COLUMNS} - 7 ))
+
+    ###
+    # Truncate the path if it's too long.
+
+    PR_FILLBAR=""
+    PR_PWDLEN=""
+### neu:
+    PR_HBAR=" "
+
+###    local promptsize=${#${(%):--- %D{%R.%S %a %b %d %Y}\! }}
+    local promptsize=${#${(%):---(%n@%m:%l)---()--}}
+    local pwdsize=${#${(%):-%~}}
+
+    if [[ "$promptsize + $pwdsize" -gt $TERMWIDTH ]]; then
+	((PR_PWDLEN=$TERMWIDTH - $promptsize))
+    else
+	PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${PR_HBAR}.)}"
+#        PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))...)}"
+    fi
+
+    ###
+    # Get APM info.
+
+    if which ibam > /dev/null; then
+	PR_APM_RESULT=`ibam --percentbattery`
+    elif which apm > /dev/null; then
+	PR_APM_RESULT=`apm`
+    fi
+
+}
+
+setopt extended_glob
+preexec () {
+    if [[ "$TERM" == "screen" ]]; then
+	local CMD=${1[(wr)^(*=*|sudo|-*)]}
+	echo -ne "\ek$CMD\e\\"
+    fi
+}
+
+setprompt () {
+
+    ###
+    # Need this so the prompt will work.
+
+    setopt promptsubst
+
+    ###
+    # See if we can use colors.
+
+    autoload colors zsh/terminfo
+    if [[ "$terminfo[colors]" -ge 8 ]]; then
+	colors
+    fi
+#    for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
+#        eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
+#        eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
+#        (( count = $count + 1 ))
+### neu:
+    for COLOR in RED GREEN BLUE CYAN YELLOW MAGENTA WHITE BLACK; do
+        eval PR_$COLOR='%{$fg[${(L)COLOR}]%}'
+        eval PR_BRIGHT_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
+    done
+##    PR_NO_COLOUR="%{$terminfo[sgr0]%}"
+
+### neu    
+	PR_RESET="%{$reset_color%}"
+
+
+    ###
+    # Decide if we need to set titlebar text.
+
+    case $TERM in
+#	xterm*)
+#	rxvt*|xterm*)
+    *xterm*|rxvt|rxvt-unicode|rxvt-256color|(dt|k|E)term)
+#	    PR_TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
+            PR_TITLEBAR=$'%{\e]0;%(!.<ROOT> | .)~ | ${COLUMNS}x${LINES} | %y\a%}'
+
+    ;;
+	screen)
+	    PR_TITLEBAR=$'%{\e_screen \005 (\005t) | %(!.-=[ROOT]=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\e\\%}'
+	;;
+#	urxvt)	
+#            PR_TITLEBAR=$'URxvt%{\e]0;%(!.<ROOT> | .)~ |${COLUMNS}x${LINES} | %y\a%}'
+#    ;;
+	*)
+	    PR_TITLEBAR=''
+    ;;
+    esac
+
+
+    ###
+    # Decide whether to set a screen title
+    if [[ "$TERM" == "screen" ]]; then
+	PR_STITLE=$'%{\ekzsh\e\\%}'
+    else
+	PR_STITLE=''
+    fi
+
+    ###
+    # APM detection
+
+    if which ibam > /dev/null; then
+	PR_APM='$PR_RED${${PR_APM_RESULT[(f)1]}[(w)-2]}%%(${${PR_APM_RESULT[(f)3]}[(w)-1]})$PR_LIGHT_BLUE:'
+    elif which apm > /dev/null; then
+	PR_APM='$PR_RED${PR_APM_RESULT[(w)5,(w)6]/\% /%%}$PR_LIGHT_BLUE:'
+    else
+	PR_APM=''
+    fi
+
+
+    ###
+    # Finally, the prompt.
+
+## grün/bernstein:
+#    PROMPT='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}\
+#$PR_BRIGHT_BLACK╾$PR_RESET$PR_GREEN┄$PR_BRIGHT_GREEN┤\
+#$PR_RESET$PR_YELLOW%$PR_PWDLEN<...<%~%<<$PR_BRIGHT_GREEN├\
+#%(?.$PR_RESET$PR_GREEN┄$PR_BRIGHT_GREEN▷.$PR_RESET$PR_BRIGHT_BLACK┄$PR_BRIGHT_RED▷)%(?.$PR_RESET.$PR_RED) '
+
+PROMPT='$PR_SET_CHARSET$PR_STITLE${(e)PR_TITLEBAR}$PR_BRIGHT_BLACK╾$PR_BLUE┄$PR_RESET$PR_CYAN┤$PR_RESET$PR_BRIGHT_CYAN%$PR_PWDLEN<...<%~%<<$PR_RESET$PR_CYAN├%(?.$PR_BRIGHT_BLUE┄$PR_RESET$PR_WHITE▷.$PR_RESET$PR_BRIGHT_BLACK┄$PR_BRIGHT_RED▷)%(?.$PR_RESET.$PR_RED) '
+
+
+##RPROMPT='%(?.$PR_RESET.$PR_RED)%*'
+#RPROMPT='!%{%B%F{cyan}%}%!%{%f%k%b%}'
+
+### grün/bernstein
+##    RPS1='${SSH_TTY:+[%n@%m]}%{$FX[bold]%}$PR_BRIGHT_BLACK╾$PR_RESET$PR_GREEN┄$PR_BRIGHT_GREEN┤\
+##$PR_RESET$PR_YELLOW⚡$PR_RESET$PR_WHITE%h$PR_BRIGHT_GREEN├$PR_RESET$PR_GREEN┄$PR_BRIGHT_BLACK╼%(?.$PR_RESET.$PR_RED)'
+
+RPS1='${SSH_TTY:+[%n@%m]}%{$FX[bold]%}$PR_BRIGHT_BLACK╾$PR_RESET$PR_BLUE┄$PR_CYAN┤$PR_BRIGHT_CYAN⚡$PR_RESET$PR_WHITE%h$PR_CYAN├$PR_BRIGHT_BLUE┄$PR_BLACK╼%(?.$PR_RESET.$PR_RED)'
+
+
+### q-- (1) andere error-mesg-output-farbe   
+###	(2) generell andere shell output- als input-farbe
+###	(3) andere sudo input/output-farbe (nicht su --> root!)
+
+###	grün/bernstein
+##    PS2='$PR_RESET$PR_BRIGHT_BLACK╾$PR_RESET$PR_GREEN┄$PR_BRIGHT_GREEN▷'
+
+	PS2='$PR_RESET$PR_BRIGHT_BLACK╾$PR_RESET$PR_BLUE┄$PR_BRIGHT_BLUE▷'
+## ⎇
+
+}
+
+setprompt
+
+#function command_not_found_handler() {echo "$fg[yellow]Was du wolle? $fg[red]$1 $fg[yellow]ist leider falsch!";}
+
+#if [ `/usr/bin/whoami` = 'root' ]
+#then
+#export PS1="%t:%{${fg_bold[red]}%n%}@%{${fg_bold[blue]}%}%m:  %~ %{${fg[white]}%}%# "
+#else
+#export PS1="%t:%{${fg_bold[green]}%n%}@%{${fg_bold[blue]}%}%m: %~ %{${fg[white]}%}%# "
+#fi 
+

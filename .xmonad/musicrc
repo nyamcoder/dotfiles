@@ -1,0 +1,33 @@
+# ~/.conkyrc    ### eigtl. .xmonad/conkyrc
+
+
+background no
+out_to_x no
+out_to_console yes
+update_interval 5
+total_run_times 0
+use_spacer none
+
+
+
+### Plan "blinkendes Icon" für pausierendes Musikstück --> Vordergrundfarbe soll blau -- weiß blinken
+###       `--> ^i($HOME/.icons/xdzen/note2.xbm)
+### Problem: Icon blinkt zwar, aber in der Phase, in der es nicht blinkt, entsteht an dieser Stelle Leerraum von der Länge der Zeichen des Pfades zum icon und/oder ^fg(\#...)!
+## * eigene variablen helfen auch nichts!
+## --> ${blink $template0}
+##  template0 "^i($HOME/.icons/xdzen/note2.xbm)"
+## Ersatzlösung: U+266B BEAMED EIGHTH NOTES und nur ein-aus-Blinken
+
+## q-- $mpd_vol
+ 
+TEXT
+
+ \
+${if_mpd_playing}\
+${if_match "${mpd_status}" == "Playing"}^fg(\#3399ff)^i($HOME/.icons/xdzen/note2.xbm)  ${mpd_smart}${else}\
+^bg(\#3399ff)^fg(\#dddddd)${blink ♫}^bg(\#222222)  ^fg(\#dddddd)${mpd_smart}${endif} \
+${else}\
+^fg(\#aaaaaa)^i($HOME/.icons/xdzen/note2.xbm)                                                            --/--${endif}
+
+
+

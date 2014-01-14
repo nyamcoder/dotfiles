@@ -1,0 +1,13 @@
+Config	{ font =	"xft:MarVAlea:size=15:antialias=true"
+ 	, bgColor =	"#222222"
+	, fgColor =	"#444444"
+	, position =	Static { xpos = 41, ypos = 14, width = 80, height =18 }
+	, lowerOnStart = False
+	, commands =	[ Run StdinReader ]
+	, sepChar =	"%"
+	, alignSep =	"}{"
+	, template =	"}{%StdinReader%"
+	}
+
+
+

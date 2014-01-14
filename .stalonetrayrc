@@ -1,0 +1,12 @@
+# file: ~/.stalonetrayrc
+# desc: stalonetray config for my netbook's xmonad setup
+# site: http://cinderwick.ca
+### --> https://github.com/thayerwilliams/msi-dotfiles/blob/748353fbdba50a2364c893e9b051e46ca4aa3546/.stalonetrayrc
+
+background "#222222"
+##geometry 1x1+1004-580
+geometry 5x1+1750-1166
+max_geometry 0x1
+icon_size 34
+icon_gravity E
+grow_gravity E

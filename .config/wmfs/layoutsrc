@@ -1,0 +1,72 @@
+[layouts]
+### def: "#C98F0A"	"#191919"    def. fg = "#7E89A2"
+### "#C98F0A" dunkelgelb 				
+### "#7E89A2" hellgelb
+### "#429942" dunkelgrün
+##################################  aussehen layouts, bes. => zeichen
+        fg = "#C98F0A"		
+#		fg = "#ff00ff"
+#		bg = "#7E89A2"
+	bg = "#000000"
+
+        # Border around the layout button.
+        border = false
+
+        # Value menu or switch.	--- layoutmenü 
+        system = "menu"
+
+        # Keep layout geo for free layout
+        keep_layout_geo = false
+
+        # Enable split mode with client_resize_<direction>
+        cfactor_enable_split = true
+
+        # Symbol displayed for the selected layout in the list
+        selected_layout_symbol = "*"
+
+        # Width of layout button
+        # layout_button_width = x
+
+        # Tiling layouts.
+#        [layout] type = "tile_right"         symbol = "RIGHT"    [/layout]
+#        [layout] type = "tile_left"          symbol = "LEFT"     [/layout]
+#        [layout] type = "tile_top"           symbol = "TOP"      [/layout]
+#        [layout] type = "tile_bottom"        symbol = "BOTTOM"   [/layout]
+#        [layout] type = "tile_grid"          symbol = "GRID_H"   [/layout]
+#        [layout] type = "tile_grid_vertical" symbol = "GRID_V"   [/layout]
+#        [layout] type = "mirror_vertical"    symbol = "MIRROR_V" [/layout]
+#        [layout] type = "mirror_horizontal"  symbol = "MIRROR_H" [/layout]
+
+        # Other layouts.
+#        [layout] type = "max"   symbol = "MAX"  [/layout]
+#        [layout] type = "free"  symbol = "FREE" [/layout]
+
+#        [layout] type = "tile_right"        symbol = "[<"       [/layout]
+#        [layout] type = "tile_left"         symbol = ">]"       [/layout]
+#        [layout] type = "tile_top"          symbol = "T"        [/layout]
+#        [layout] type = "tile_bottom"       symbol = "v"        [/layout]
+#        [layout] type = "tile_grid"         symbol = "|+|"      [/layout]
+#        [layout] type = "mirror_vertical"   symbol = "|=|"      [/layout]
+#        [layout] type = "mirror_horizontal" symbol = "=|="      [/layout]
+#        [layout] type = "max"               symbol = "|«»|"        [/layout]
+#        [layout] type = "free"              symbol = "*"        [/layout]   
+# ???        [layout] type = "layer"             symbol = "="    [/layout]
+
+### nach: http://wmfs.info/projects/wmfs/wiki/UserWmfsrc_s__C
+        [layout] type = "tile_right"        symbol = " \i[5;27;15;10;$HOME/.config/wmfs/icons-green/tr.png]\ " [/layout]
+        [layout] type = "tile_left"         symbol = " \i[5;27;15;10;$HOME/.config/wmfs/icons-green/tl.png]\ " [/layout]
+        [layout] type = "tile_top"          symbol = " \i[5;27;15;10;$HOME/.config/wmfs/icons-green/tt.png]\ " [/layout]
+        [layout] type = "tile_bottom"       symbol = " \i[5;27;15;10;$HOME/.config/wmfs/icons-green/tb.png]\ " [/layout]
+        [layout] type = "tile_grid"        symbol = " \i[5;27;15;10;$HOME/.config/wmfs/icons-green/tg.png]\ " [/layout]
+        [layout] type = "mirror_vertical"   symbol = " \i[5;27;15;10;$HOME/.config/wmfs/icons-green/mv.png]\ " [/layout]
+        [layout] type = "mirror_horizontal" symbol = " \i[5;27;15;10;$HOME/.config/wmfs/icons-green/mh.png]\ " [/layout]
+
+        # Other layouts.
+        [layout] type = "max"               symbol = " \i[5;27;15;10;$HOME/.config/wmfs/icons-green/max.png]\ "[/layout]
+        [layout] type = "free"              symbol = " \i[7;27;15;10;$HOME/.config/wmfs/icons-green/fr.png]\ " [/layout]
+
+### $ convert oldimage.png -fill "#c98f0a" -opaque "#bebebe" newimage.png
+
+
+[/layouts]
+

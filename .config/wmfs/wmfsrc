@@ -1,0 +1,29 @@
+### mito :: nyamcoder
+#
+### NOTE: works for wmfs v1 only!!
+#
+# This is the default wmfs config file, copy it to
+# $HOME/.config/wmfs/wmfsrc and edit it.
+#
+
+# Include file to split configuration
+# @include "$HOME/.config/wmfs/menu-wmfsrc"
+
+@include "$HOME/.config/wmfs/miscrc"
+@include "$HOME/.config/wmfs/barrc"
+@include "$HOME/.config/wmfs/layoutsrc"
+@include "$HOME/.config/wmfs/tagsrc"
+@include "$HOME/.config/wmfs/rootrc"
+@include "$HOME/.config/wmfs/clientrc"
+@include "$HOME/.config/wmfs/rulesrc"
+@include "$HOME/.config/wmfs/menurc"
+@include "$HOME/.config/wmfs/launcherrc"
+@include "$HOME/.config/wmfs/keysrc"
+
+
+
+
+
+
+
+

@@ -1,0 +1,197 @@
+### .Xresources  by  nexus7 :: nyamcoder
+
+Xcursor.theme:		ArchCursorTheme
+Xcursor.size:		32
+
+! http://wiki.afterstep.org/index.php?title=Rxvt-Unicode_Configuration_Tutorial
+
+! terminal colors ------------------------------------------------------------
+! https://wiki.archlinux.org/index.php/X_resources#Terminal_colors
+
+! terminal color set 
+!*background: #222222
+!*foreground: #babdb6
+! Black + DarkGrey
+*color0:  #222222
+*color8:  #444444
+! DarkRed + Red
+*color1:  #d94c3d
+*color9:  #ee0000
+! DarkGreen + Green
+*color2:  #a4bc51
+*color10: #88FF00
+! DarkYellow + Yellow
+*color3:  #888800
+*color11: #eeee00
+! DarkBlue + Blue
+*color4:  #111177
+*color12: #2222dd
+! DarkMagenta + Magenta
+*color5:  #ce5c00
+*color13: #f57900
+!DarkCyan + Cyan
+*color6:  #174988
+*color14: #3399ff
+! LightGrey + White
+*color7:  #888888
+*color15: #dddddd
+
+! sehr schönes dunkles blau, ähnlich solarized, floureszierend: #0E2426
+
+
+! Font-Einstellungen --> https://wiki.archlinux.org/index.php/Font_Configuration#Applications_without_fontconfig_support
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+
+! http://invisible-island.net/xterm/xterm.faq.html#scaled_font  --> bold font looks ugly
+! FontPath        "/usr/lib/X11/fonts/100dpi/:unscaled"
+
+! http://www.linuxquestions.org/questions/linux-software-2/how-to-make-my-rxvt-more-beautiful-76645/
+! su. setenv XAPPLRESDIR "/usr/local/X11R6/app-defaults"
+
+
+! *** rxvt-unicode-Einstellungen ***
+! ==================================
+! https://wiki.archlinux.org/index.php/Urxvt
+! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
+! pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.7.pod
+! http://wiki.afterstep.org/index.php?title=Rxvt-Unicode_Configuration_Tutorial
+! http://www.pmoghadam.com/homepage/HTML/urxvt.html
+
+URxvt.font: xft:ocra10:size=14
+
+URxvt.scrollBar:	off
+!	<Transparenz>
+URxvt*transparent:	true
+URxvt.depth:		32
+URxvt.background:	#222222
+URxvt.foreground:       #dddddd
+URxvt.cursorColor:	#3399ff
+URxvt*tintColor:	lightblue
+!URxvt.shading:		50 ! su.
+!URxvt*inheritPixmap	True
+! http://forum.vectorlinux.com/index.php?topic=9200.15;wap2
+URxvt.blendType:	true
+!URxvt.blendType:	add
+!URxvt.blendType:   alphablend
+
+! http://www.linuxquestions.org/questions/slackware-14/transparency-not-working-with-urxvt-859429/
+URxvt*shading: 20
+!URxvt.shading: 10
+!URxvt.inheritPixmap: true
+!URxvt.fading: 10 
+
+
+! q-- man urxvt  -blt string
+! q-- urxvt -blt add hue
+! https://github.com/trapd00r/configs-laptop/blob/master/.Xresources
+
+URxvt*cursorColor: magenta
+URxvt*colorUL: #c5f779
+URxvt*underlineColor: #c5f779
+
+
+! pseudo transparency - true or false (default)
+!URxvt*transparent: true 
+! --> pseudo only
+
+! tint with any color; i.e., blue, red, tomato4, olivedrab2, etc.
+!   some nice listings are at:
+!     http://www.nisrv.com/drupal/?q=node/11
+!     http://www.htmlgoodies.com/tutorials/colors/article.php/3478921
+!URxvt*tintColor: olivedrab2  --> pseudo only
+
+!URxvt.inputMethod:	ibus
+!URxvt.preeditType:	OnTheSpot,None
+
+! libAfterImage (adds support for transparency and background images). 
+! http://wiki.afterstep.org/index.php?title=Rxvt-Unicode_Configuration_Tutorial#Rxvt-Unicode_and_libAfterImage_(libAI)
+! http://www.afterstep.org/afterimage/index.php
+
+!	<Grundschrift>
+!URxvt.font:		xft:OCR A:size=14:antialias=false,xft:UnDotum:size=14,xft:Bitstream Vera Sans Mono:size=14
+!URxvt.font:             xft:DejaVu Sans Mono:pixelsize=16:antialias=true:hinting=true
+!URxvt.font:		xft:UnDotum,은 돋움:size=16:antialias=false:hinting=false
+!URxvt.font:            xft:OCR A Extended:size=16:antialias=true:hinting=true
+! --> http://www.chipstips.com/?p=576  "Taming the wild Unicode"
+! URxvt.font: xft:DejaVu Sans Mono:pixelsize=12,xft:Code 2000:pixelsize=10
+! OCR A Extended:style=Regular
+! $ fc-list | grep ...
+
+! --> https://wiki.archlinux.de/title/Xdefaults#urxvt_Einstellungen
+URxvt*print-pipe:         cat > $(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))
+
+!	<Taskbar-Icon>
+!URxvt*iconFile:		/usr/share/icons/Clarity/scalable/apps/terminal.svg
+
+! 	<Zwischenablage ()>
+!!URxvt.perl-ext-common:  default,clipboard,tabbed
+
+!	<klickbare Links (öffnet Firefox; braucht urxvt-url-select)>
+!
+! Alt+U	Enter selection mode. The last URL on your screen will be selected. You can repeat Alt+U to select the next upward URL.
+! K	Select next upward URL
+! J	Select next downward URL
+! Return Open selected URL in browser and quit selection mode
+! O	Open selected URL in browser without quitting selection mode
+! Y	Copy (yank) selected URL and quit selection mode
+! Esc	Cancel URL selection mode 
+!
+!URxvt.perl-ext:		url-select
+
+URxvt.keysym.M-u:	perl:url-select:select_next
+URxvt.urlLauncher:	firefox
+URxvt.underlineURLs:	true
+
+! Perl extension config
+URxvt.perl-ext-common: default
+!URxvt.perl-ext: tabbed
+! Any scripts placed here will override global ones with the same name
+URxvt.perl-lib: $HOME/.urxvt/
+
+! Tabbed extension configuration
+URxvt.tabbed.tabbar-fg: 7
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg:    14
+URxvt.tabbed.tab-bg:    8
+URxvt.tabbed.new-button: false
+
+URxvt.tabbed.tabcmds.1: Z|shell
+URxvt.tabbed.tabcmds.2: R|root|su -
+URxvt.tabbed.tabcmds.3: M|mc|mc
+URxvt.tabbed.tabcmds.4: P|procs|htop
+URxvt.tabbed.tabcmds.5: L|cpu|ttyload
+
+URxvt.session: Z|M|R|P|L
+! standard session with no tabs (though being activated):
+!URxvt.session: 
+
+! 	<Tabbing>
+!
+! Shift + ↓	new tab
+! Shift + ←	go to left tab
+! Shift + →	go to right tab
+! Ctrl  + ←	move tab to the left
+! Ctrl  + →	move tab to the right
+! Ctrl  + D	close tab
+
+
+! xpdf -----------------------------------------------------------------------
+! --> https://wiki.archlinux.de/title/Xdefaults#xpdf_Einstellungen
+
+xpdf*enableFreetype:    yes
+xpdf*antialias:         yes
+xpdf*foreground:        white
+xpdf*background:        cyan
+xpdf*urlCommand:        /usr/bin/firefox %s
+
+!! s dort auch für xclock, lal ua.
+
+!! rxvt reference:
+!! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.7.pod
+!! q-- wm class etc in systray anzeigen

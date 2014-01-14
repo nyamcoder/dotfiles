@@ -1,0 +1,31 @@
+[root]
+       # Command you can execute to set the background.
+#        background_command = "xsetroot -solid red"
+
+### nach: http://wmfs.info/projects/wmfs/wiki/UserWmfsrc_s__C
+#background_command = "$HOME/.config/wmfs/autostart.sh &"  ## --> fehlerhafte ausgabe
+
+### https://bbs.archlinux.org/viewtopic.php?pid=982522#p982522 
+#background_command = "xmobar && xsetroot -solid red"
+#background_command = "feh --bg-fill $HOME/DATA/green-a-silent-corner-original.jpg && $HOME/.config/wmfs/status.sh && $HOME/.config/wmfs/linien.sh && killall -9 xmobar && xmobar"
+
+background_command = "feh --bg-fill $HOME/DATA/mybg.png && killall -9 xmobar && xmobar"
+
+### (1) xmobar killen, sonst zuviel verbrauch bei restart
+### individuelles Datum-Shellscript für xmobar --> 
+### nach: http://stackoverflow.com/questions/5614893/xmobar-question
+
+
+### zufügen: linien.sh für weitere 'wmfs -s'-Aufrufe
+
+
+
+#        background_command = "$HOME/.config/wmfs/status.sh"
+#background_command = "xmobar"
+
+
+        [mouse] button = "4" func = "tag_next"              [/mouse]
+        [mouse] button = "5" func = "tag_prev"              [/mouse]
+        [mouse] button = "3" func = "menu" cmd = "rootmenu" [/mouse]
+[/root]
+

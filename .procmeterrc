@@ -1,0 +1,125 @@
+### .procmeterrc  by  nexus7 :: nyamcoder
+### for procmeter v2
+
+[startup]
+
+
+# Procmeter version, clock, CPU graph, load text
+#order=ProcMeter.Version Date_Time.Time_HM \
+#	Statistics.CPU-g Processes.Load-t
+
+
+#order= \
+#	Uname.Hostname-t \
+#	Date_Time.Time_HM Date_Time.Date_DM \
+#	Processes.Load-b Processes.Processes-t \
+#	Memory.Mem_Free-b Memory.Mem_Free-t Memory.Mem_Used-b Memory.Mem_Used-t\
+#	Stat-CPU.CPU-g \
+#	\
+#	Network.Byte_eth0-t \
+order = Uname.Hostname \
+	Uname.Kernel_Version \
+	Date_Time.Uptime_DHM \
+	Statistics.CPU-g \
+	Statistics.CPU-t \
+	Processes.Load-t \ 
+	Processes.Processes-t \
+	Memory.Mem_Used-t \
+	Memory.Swap_Used-t \
+	Network.Byte_eth0-g \
+        Network.Byte_Rx_eth0-t \
+        Network.Byte_Tx_eth0-t \
+	Stat-Disk.Disk_Read-g \
+	Stat-Disk.Disk_Read-t \
+	Stat-Disk.Disk_Write-g \
+	Stat-Disk.Disk_Write-t \
+	DiskUsage.DF_Free
+#	DiskUsage.DF_Used_/dev/mapper/home
+#	DiskUsage
+
+#DiskUsage DF_Used DF_Free
+
+## Network.Pkt_eth0 --> speed
+
+[resources]
+
+foreground = #3399ff
+background = #222222
+
+# xft? :antialias=true ?
+text-font = -*-ocra10-medium-r-normal--18-*-*-*-*-*-iso10646-1
+graph-solid = no
+grid-min = 5
+grid-foreground = grey50
+## ?? grid-background = #880000
+
+label-font = -misc-undotum-medium-r-normal--11-0-0-0-p-0-iso10646-1
+label-foreground = #aaaaaa
+#label-background = #222222
+label-position = bottom
+
+menu-foreground = #dddddd
+menu-background = #444444
+menu-font = -misc-undotum-medium-r-normal--0-0-0-0-p-0-iso10646-1
+
+
+#[ProcMeter.Version]
+
+#text-font = -misc-undotum-medium-r-normal--11-0-0-0-p-0-iso10646-1
+#label-position = none
+
+run = Shell(terminal -e procmeter3 -h | less)
+
+#[Date_Time.Uptime_DHM]
+#label-position = bottom
+
+[Uname.Kernel_Version]
+run = Shell(terminal sudo pacman -Syu)
+
+
+[Statistics]
+
+
+[Statistics.CPU]
+graph-solid = yes
+# The minimum number of grid lines, they are 20% each.
+grid-min = 5
+#graph-solid=no
+run = Shell(terminal -e htop)
+
+[Processes]
+
+run = Shell(terminal -e htop)
+
+
+
+[Network]
+#graph-solid=no
+graph-scale = 100
+foreground = #a4bc51
+label-position = bottom
+ # To pick up extra devices not automatically recognised.
+ #options=ppp0 slip0
+run = Shell(terminal sudo iptraf)
+[Network.Byte_Rx_eth0]
+foreground = #a4bc51
+#label-position = none
+[Network.Byte_Tx_eth0]
+#label-position = none 
+foreground = #d94c3d
+
+
+#[DiskUsage]
+[DiskUsage.DF_Free]
+options=/dev/mapper/home /dev/mapper/data
+
+[Stat-Disk]
+grid-foreground = #3399ff
+foreground = #dddddd
+grid-min = 4
+[Stat-Disk.Disk_Read]
+# Information about the disks
+run = Shell(terminal df -h)
+
+[Stat-Disk.Disk_Write]  
+run = Shell(terminal du)

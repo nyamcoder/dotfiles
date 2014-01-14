@@ -1,0 +1,18 @@
+[launcher]
+        [set_launcher]
+                # Limit size of the launcher window (px)
+                width_limit = 500
+
+                name = "launcher_exec"
+                prompt = ":: Here we go! >>> "
+                command = "exec"
+        [/set_launcher]
+### --> http://wmfs.info/projects/wmfs/wiki/UserWmfsrc_lidstah
+        [set_launcher]
+                name = "viwmfs" 
+                prompt = "> " 
+                command = "wmfs -V" 
+        [/set_launcher]
+
+[/launcher]
+

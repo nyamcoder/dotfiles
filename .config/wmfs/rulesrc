@@ -1,0 +1,134 @@
+[rules]
+       # Example of rule for MPlayer
+       [rule]
+               instance      = "xv"       # First part of WM_CLASS
+               class         = "MPlayer"  # Seconf part of WM_CLASS, not needed if first part is correct
+               # role        = ""         # WM_WINDOW_ROLE
+               screen        = 0          # Screen to use
+               tag           = 9          # Tag number of apps
+               free          = true       # Set automatic free client
+               max           = false      # Set automatic maximized client
+               follow_client = false      # follow the client
+               ignore_tags   = false      # ignore tag (free mode)
+       [/rule]
+       [rule]
+           instance = "thunar"
+           class = "Thunar"
+#           role = "vlc-video"
+           screen = 0
+        tag = 2
+           free = false
+           max = false
+       [/rule]
+       [rule]
+           instance = "ristretto"
+#           class = "Thunar"
+#           role = "vlc-video"
+           screen = 0
+        tag = 5
+           free = true
+           max = false
+       [/rule]
+
+       [rule]
+           instance = "feh"
+#           class = "Thunar"
+#           role = "vlc-video"
+           screen = 0
+           free = true
+           center = true
+       [/rule]
+
+
+
+       # vlc
+       [rule]
+           instance = "vlc"
+           class = "Vlc"
+#           role = "vlc-video"
+           screen = 0
+	tag = 9
+           free = true
+           center = true
+       [/rule]
+
+        [rule]
+             instance      = "skype"
+             class         = "skype"
+             screen = 0  
+             tag = 8
+             max           = false  
+             layout = "free"
+         [/rule] 
+
+
+       [rule]
+           instance = "vdpau"
+           class = "MPlayer"
+           screen = 0
+           free = true
+       [/rule]
+
+#       [rule]
+#           instance = "vlc"
+#           class = "Vlc"
+#           role = "vlc-video"
+#           screen = 0
+#           free = true
+#           center = true
+#		tag = 9
+#       [/rule]
+
+       [rule]
+           instance = "bashrun"
+           class = "XTerm"
+           free = true
+       [/rule]
+       [rule]		### ?
+           instance = "xmessage"
+           class = "Xmessage"
+           free = true
+       [/rule]
+       [rule]
+           instance = "feh"
+           class = "feh"
+           free = true
+       [/rule]
+       [rule]
+           instance = "xcalc"
+           class = "XCalc"
+           free = false
+		tag = 5
+       [/rule]
+       [rule]
+           class = "glxgears"
+           free = true
+       [/rule]
+  
+# Firefox in tag 1 screen 1
+  [rule]
+    class = "Firefox"
+    screen = 0
+    tag = 7
+  [/rule]
+  
+# Auto free pour gimp
+  [rule]
+    class = "Gimp" # First part of WM_CLASS
+    #instance = "Gimp" # Seconf part of WM_CLASS, not needed if first part is correct
+    #role = " # WM_WINDOW_ROLE (will be implemented)
+    #screen = 1 # Screen to use
+    tag = 4 # Tag number of apps
+    free = false # Set automatic free client
+# max = false # Set automatic maximized client
+  [/rule]
+  
+
+  [rule]
+    class = "xmessage" # First part of WM_CLASS
+    instance = "Xmessage" # Seconf part of WM_CLASS, not needed if first part is correct
+    free = true # Set automatic free client
+  [/rule]
+
+[/rules]
+

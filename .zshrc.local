@@ -1,0 +1,178 @@
+#==============================================================
+#        __       __       __       __       __
+#       / /\     / /\     /_/\     / /\     / /\
+#      / / |_   / / /\   _\ \ \   / /  \   / / /
+#     /_/  |/\ /_/ /  \ /_/\/  \ /_/ / /_ /_/ / /\
+#  __ \_\/|  / \ \  / / \ \  /\/ \ \  __/ \ \ \/ /
+# /_/\  |_| /   \ \/ /   \ \ \    \ \ \    \ \  /
+# \_\/  \_\/     \_\/     \_\/     \_\/     \_\/
+#
+# A L I A S E S  F O R  Z S H
+#
+###### (( http://dotshare.it/dots/100/ ))
+## 
+## https://wiki.archlinux.de/title/Zsh#Hinweise_zu_der_GRML_Konfiguration
+##
+## Die .zshrc sollte nicht bearbeitet werden, für eigene Einstellungen verwendet man die Datei .zshrc.local Falls man einige Einstellungen verändern will, kann man diese auch in .zshrc.pre schreiben, die grml-Einstellungen werden dann überschrieben. Befehle für eine Login Shell kann man unter .zprofile vornehmen.
+## s.a. $ cat /etc/skel/.zshrc
+#fbterm 2>/dev/null
+
+#mpd &
+
+
+
+source $HOME/.scripts/live-command-coloring.sh
+
+# g-- zsh precmd history 1 | awk '{print $2}'
+# http://vagubunt.wordpress.com/2011/01/07/shell-workflow-pimp-my-zsh-zshrc/
+
+
+##### WINDOW TITLE
+
+### nur xterm
+# http://glyf.livejournal.com/63106.html
+set_xterm_title () {
+        local title="$1"
+        echo -ne "\e]0;$title\007"
+}
+
+precmd () {
+        set_xterm_title "${TERM} - ${USER}@${HOSTNAME} `dirs -0` $PROMPTCHAR"
+}
+
+preexec () {
+        set_xterm_title "${TERM} - $1 {`dirs -0`} (${USER}@${HOSTNAME})"
+}
+
+zstyle ':completion:*:warnings' format '%USorry, nix für: %d%u'
+
+ 
+### --> http://zsh.sourceforge.net/FAQ/zshfaq05.html #5.4: How can I input characters that aren't on my keyboard?
+autoload -Uz insert-composed-char
+zle -N insert-composed-char
+bindkey "^Y" insert-composed-char
+
+## --> http://www.zsh.org/mla/users/2009/msg00910.html
+autoload -Uz insert-unicode-char
+zle -N insert-unicode-char
+bindkey "^U" insert-unicode-char
+
+
+# -----------------------
+# Colors in TTY (Zenburn)
+# -----------------------
+#if [[ $TERM == "linux" ]]; then
+#echo -en "\e]P01e2320" # zen-black (norm. black)
+#echo -en "\e]P8709080" # zen-bright-black (norm. darkgrey)
+#echo -en "\e]P1705050" # zen-red (norm. darkred)
+#echo -en "\e]P9dca3a3" # zen-bright-red (norm. red)
+#echo -en "\e]P260b48a" # zen-green (norm. darkgreen)
+#echo -en "\e]PAc3bf9f" # zen-bright-green (norm. green)
+#echo -en "\e]P3dfaf8f" # zen-yellow (norm. brown)
+#echo -en "\e]PBf0dfaf" # zen-bright-yellow (norm. yellow)
+#echo -en "\e]P4506070" # zen-blue (norm. darkblue)
+#echo -en "\e]PC94bff3" # zen-bright-blue (norm. blue)
+#echo -en "\e]P5dc8cc3" # zen-purple (norm. darkmagenta)
+#echo -en "\e]PDec93d3" # zen-bright-purple (norm. magenta)
+#echo -en "\e]P68cd0d3" # zen-cyan (norm. darkcyan)
+#echo -en "\e]PE93e0e3" # zen-bright-cyan (norm. cyan)
+#echo -en "\e]P7dcdccc" # zen-white (norm. lightgrey)
+#echo -en "\e]PFffffff" # zen-bright-white (norm. white)
+#fi
+
+
+### --> prompt-file
+source $HOME/.zsh-prompts/meinprompt
+
+###
+#source $HOME/.oh-my-zsh/plugins/vi-mode/vi-mode.plugin.zsh
+
+### --> https://github.com/trapd00r/LS_COLORS
+#source $HOME/.scripts/zsh-syntax-highlighting-filetypes.zsh
+### `--> nach zeilenwechsel bei zeicheneingabe
+### .zshrc.local:13: bad pattern: eval( dircolors -b $HOME/.dircolors ) -->
+setopt NO_bare_glob_qual
+
+#eval( dircolors -b $HOME/.dircolors )
+eval `dircolors -b /usr/share/LS_COLORS `
+
+# My aliases
+
+# Set up auto extension stuff
+alias -s html=$BROWSER
+alias -s org=$BROWSER
+alias -s php=$BROWSER
+alias -s com=$BROWSER
+alias -s net=$BROWSER
+alias -s png=feh
+alias -s jpg=feh
+alias -s gif=feg
+alias -s sxw=soffice
+alias -s doc=soffice
+alias -s gz='tar -xzvf'
+alias -s bz2='tar -xjvf'
+alias -s java=$EDITOR
+alias -s txt=$EDITOR
+alias -s PKGBUILD=$EDITOR
+alias -s mails='getmail -ln -r getmailrc1 -r getmailrc2 -r getmailrc3'
+
+
+### von aur-- cdu
+alias du='cdu -idh'
+
+alias video='cd $HOME/DATA/VIDEO'
+alias audio='cd $HOME/DATA/AUDIO'
+alias mucke='cd $HOME/DATA/AUDIO/MeineMucke'
+alias radio='cd $HOME/DATA/AUDIO/MeineMucke/_radio'
+
+alias jx='cd $HOME/.xmonad;joe xmonad.hs'
+
+alias pacsys='sudo pacman-color -Syu'
+alias pacu='sudo pacman-color -U'
+alias history='fc -ldErn -$HISTSIZE'
+
+alias secpass='pwgen -s -y 60'
+alias to-utf='convmv --notest -f iso-8859-15 -t utf-8 -r .'
+
+# Normal aliases
+alias ls='ls --color=auto -F'
+alias lsd='ls -ld *(-/DN)'
+alias lsa='ls -ld .*'
+alias f='find |grep'
+alias c="clear"
+alias dir='ls -1'
+alias gvim='gvim -geom 82x35'
+alias ..='cd ..'
+
+### farbiger output
+alias la='ls++ --ptsf -A'
+
+alias ppp-on='sudo /usr/sbin/ppp-on'
+alias ppp-off='sudo /usr/sbin/ppp-off'
+
+alias hist="grep '$1' $HOME/.zsh_history"
+
+alias mem="free -m"
+
+alias ko-fox='LANG=ko_KR.utf8 firefox &'
+alias ko-writer='LANG=ko_KR.utf8 soffice -writer&'
+alias ko-ooo='LANG=ko_KR.utf8 soffice &'
+alias desktop='thunar /usr/share/applications &'
+
+#alias tmux="tmux -2 -u"
+
+alias wdr2="killall -9 mpg123; LANG=ISO-8859-15 mpg123 -@ http://www.wdr.de/wdrlive/media/wdr2.m3u"
+alias wdr5="killall -9 mpg123;mpg123 -@ http://www.wdr.de/wdrlive/media/wdr5.m3u"
+alias live="killall -9 mpg123;mpg123 -@ http://www.wdr.de/wdrlive/media/audioevent.m3u"
+alias dradio="killall -9 mpg123;mpg123 -@ http://www.dradio.de/streaming/dlf.m3u"
+alias dkultur="killall -9 mpg123;mpg123 -@ http://www.dradio.de/streaming/dkultur.m3u"
+alias europa="killall -9 mpg123;mpg123 -@ http://www.wdr.de/wdrlive/media/fhe.m3u"
+alias trance="killall -9 mpg123;mpg123 -@ http://www.friskyradio.com/frisky.m3u"
+ 
+
+# command L equivalent to command |less
+alias -g L='|less' 
+
+# command S equivalent to command &> /dev/null &
+alias -g S='&> /dev/null &'
+
